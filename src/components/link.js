@@ -5,6 +5,7 @@ export default function Link({ title, url }) {
     <motion.div
       whileHover={{ scale: 1.2 }}
       whileTap={{ scale: 0.8 }}
+      onClick={() => console.log("oeoe")}
       //   style={box}
     >
       {title}:{url}

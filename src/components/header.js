@@ -3,8 +3,19 @@ import { useEffect, useRef, useState } from "react";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [zIndex, setZIndex] = useState(10);
   const containerRef = useRef < HTMLDivElement > null;
   const { height } = useDimensions(containerRef);
+
+  useEffect(() => {
+    if (isOpen) {
+      setZIndex(20);
+    }
+  }, [isOpen]);
+
+  const handleAnimationComplete = () => {
+    if (!isOpen) setZIndex(10);
+  };
 
   return (
     <div>
@@ -15,9 +26,11 @@ export function Header() {
           animate={isOpen ? "open" : "closed"}
           custom={height}
           ref={containerRef}
+          style={{ zIndex }}
+          onAnimationComplete={handleAnimationComplete}
         >
           <motion.div style={background} variants={sidebarVariants} />
-          <Navigation />
+          <Navigation toggle={() => setIsOpen(!isOpen)} isOpen={isOpen} />
           <MenuToggle toggle={() => setIsOpen(!isOpen)} />
         </motion.nav>
       </div>
@@ -34,10 +47,13 @@ const navVariants = {
   },
 };
 
-const Navigation = () => (
-  <motion.ul style={list} variants={navVariants}>
-    {[0, 1, 2, 3, 4].map((i) => (
-      <MenuItem i={i} key={i} />
+const Navigation = ({ toggle, isOpen }) => (
+  <motion.ul
+    style={{ ...list, pointerEvents: isOpen ? "auto" : "none" }}
+    variants={navVariants}
+  >
+    {[0, 1, 2].map((i) => (
+      <MenuItem i={i} key={i} toggle={toggle} />
     ))}
   </motion.ul>
 );
@@ -60,9 +76,10 @@ const itemVariants = {
 };
 
 const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
+const parts = ["Home", "Projects", "Contact"];
 
-const MenuItem = ({ i }) => {
-  const border = `2px solid ${colors[i]}`;
+const MenuItem = ({ i, toggle }) => {
+  const color = `${colors[i]}`;
   return (
     <motion.li
       style={listItem}
@@ -70,8 +87,14 @@ const MenuItem = ({ i }) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div style={{ ...iconPlaceholder, border }} />
-      <div style={{ ...textPlaceholder, border }} />
+      {/* <div style={{ ...iconPlaceholder, border }} /> */}
+      <a
+        style={{ ...textPlaceholder, color }}
+        onClick={toggle}
+        href={`#${parts[i]}`}
+      >
+        {parts[i]}
+      </a>
     </motion.li>
   );
 };
@@ -145,7 +168,6 @@ const container = {
   flex: 1,
   maxWidth: "100%",
   height: 400,
-  backgroundColor: "var(--accent)",
   borderRadius: 20,
   overflow: "hidden",
 };
@@ -181,34 +203,32 @@ const list = {
   padding: 25,
   margin: 0,
   position: "absolute",
-  top: 80,
+  top: 0,
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  left: "calc(50% - 40% - 25px)",
   width: "80%",
 };
 
 const listItem = {
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-start",
+  justifyContent: "center",
   padding: 0,
   margin: 0,
   listStyle: "none",
-  marginBottom: 20,
+  marginBottom: 40,
   cursor: "pointer",
-};
-
-const iconPlaceholder = {
-  width: 40,
-  height: 40,
-  borderRadius: "50%",
-  flex: "40px 0",
-  marginRight: 20,
 };
 
 const textPlaceholder = {
   borderRadius: 5,
-  width: 200,
-  height: 20,
   flex: 1,
+  display: "flex",
+  justifyContent: "center",
+  textDecoration: "none",
 };
 
 /**

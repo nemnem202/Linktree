@@ -1,5 +1,3 @@
-"use client";
-
 import {
   motion,
   MotionValue,
@@ -18,7 +16,7 @@ function Content({ children }) {
   const { scrollYProgress } = useScroll({ target: ref });
   const y = useParallax(scrollYProgress, 300);
   return (
-    <section className="section-content">
+    <section id={`${children.title}`} className="section-content">
       <div ref={ref}>{children.component}</div>
       <motion.h2
         // Hide until scroll progress is measured
@@ -69,6 +67,15 @@ function StyleSheet() {
                     justify-content: center;
                     align-items: center;
                     position: relative;
+                    width:100%;
+            }
+
+            .section-content > :first-child {
+              z-index: 15;
+              position: relative;
+              display: flex;
+              flex-direction:column;
+              justify-content:start
             }
 
             .section-content h2 {
@@ -84,6 +91,7 @@ function StyleSheet() {
                     left: calc(45px + 5%);
                     width: 50%;
                     text-align: left;
+                    z-index:18;
             }
 
             .progress {

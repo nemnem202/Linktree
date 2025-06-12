@@ -1,7 +1,13 @@
 import { useInView, motion } from "motion/react";
 import * as React from "react";
 
-export default function FirstTextAnimation({ text, size, delay = 0 }) {
+export default function FirstTextAnimation({
+  text,
+  size,
+  delay = 0,
+  center = true,
+  color = "white",
+}) {
   const splittedText = text.split("");
 
   const pullupVariant = {
@@ -21,7 +27,8 @@ export default function FirstTextAnimation({ text, size, delay = 0 }) {
       style={{
         display: "flex",
         fontSize: `${size}rem`,
-        justifyContent: "center",
+        color: color,
+        justifyContent: center ? "center" : "flex-start",
       }}
     >
       {splittedText.map((current, i) => (

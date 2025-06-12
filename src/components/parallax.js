@@ -5,7 +5,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function useParallax(value, distance) {
   return useTransform(value, [0, 1], [-distance, distance]);
@@ -14,7 +14,7 @@ function useParallax(value, distance) {
 function Content({ children }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 300);
+  const y = useParallax(scrollYProgress, window.innerHeight);
   return (
     <section id={`${children.title}`} className="section-content">
       <div ref={ref}>{children.component}</div>
@@ -61,7 +61,7 @@ function StyleSheet() {
             }
 
             .section-content {
-                    height: 100vh;
+                    height: 100dvh;
                     scroll-snap-align: start;
                     display: flex;
                     justify-content: center;
@@ -91,7 +91,7 @@ function StyleSheet() {
                     left: calc(45px + 5%);
                     width: 50%;
                     text-align: left;
-                    z-index:18;
+                  
             }
 
             .progress {

@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/nemnem202/Linktree/static/css/main.4c7e6de3.css",
-    "main.js": "/nemnem202/Linktree/static/js/main.09637d28.js",
-    "static/js/453.fb98b5e0.chunk.js": "/nemnem202/Linktree/static/js/453.fb98b5e0.chunk.js",
-    "index.html": "/nemnem202/Linktree/index.html",
-    "main.4c7e6de3.css.map": "/nemnem202/Linktree/static/css/main.4c7e6de3.css.map",
-    "main.09637d28.js.map": "/nemnem202/Linktree/static/js/main.09637d28.js.map",
-    "453.fb98b5e0.chunk.js.map": "/nemnem202/Linktree/static/js/453.fb98b5e0.chunk.js.map"
+    "main.css": "/Linktree/static/css/main.4c7e6de3.css",
+    "main.js": "/Linktree/static/js/main.11f70d0b.js",
+    "static/js/453.fb98b5e0.chunk.js": "/Linktree/static/js/453.fb98b5e0.chunk.js",
+    "index.html": "/Linktree/index.html",
+    "main.4c7e6de3.css.map": "/Linktree/static/css/main.4c7e6de3.css.map",
+    "main.11f70d0b.js.map": "/Linktree/static/js/main.11f70d0b.js.map",
+    "453.fb98b5e0.chunk.js.map": "/Linktree/static/js/453.fb98b5e0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4c7e6de3.css",
-    "static/js/main.09637d28.js"
+    "static/js/main.11f70d0b.js"
   ]
 }
